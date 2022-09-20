@@ -1,10 +1,12 @@
 package GUI;
 
+import BUS.LoginBUS;
+import DTO.AccountDTO;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.*;
-import java.util.logging.*;
+import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.ImageIcon;
 
 public class Login extends JFrame {
 
@@ -19,91 +21,62 @@ public class Login extends JFrame {
 
     public void init() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 500);
+        setSize(1092, 728);
+        setLayout(new BorderLayout());
 
-        JPanel pnLayout = new JPanel();
-        pnLayout.setLayout(new BorderLayout());
-        add(pnLayout);
-
-        JPanel pnTop = new JPanel();
-        pnTop.setPreferredSize(new Dimension(700, 70));
-        pnTop.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 15));
-        pnTop.setBackground(new Color(255, 153, 51));
-        JLabel lbLogin = new JLabel("Đăng nhập hệ thống");
-        lbLogin.setFont(new Font("Segoe UI", 1, 30));
-        lbLogin.setForeground(Color.white);
-        pnTop.add(lbLogin);
-        pnLayout.add(pnTop, BorderLayout.NORTH);
-
-        JPanel pnCenter = new JPanel();
-        pnCenter.setLayout(null);
-        pnCenter.setBackground(new Color(23, 62, 78));
-        pnLayout.add(pnCenter, BorderLayout.CENTER);
-
-        JPanel pnForm = new JPanel();
-        pnForm.setLayout(null);
-        pnForm.setBounds(90, 40, 370, 200);
-        pnCenter.add(pnForm);
-        JPanel pnLabel = new JPanel();
-        pnLabel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 45));
-        pnLabel.setBackground(new Color(23, 62, 78));
-        pnLabel.setBounds(0, 0, 120, 200);
-        pnForm.add(pnLabel);
-
-        JPanel pnText = new JPanel();
-        pnText.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 35));
-        pnText.setBackground(new Color(23, 62, 78));
-        pnText.setBounds(120, 0, 250, 200);
-        pnForm.add(pnText);
+        JLabel background = new JLabel(new ImageIcon(getClass().getResource("/images/coffee-background.jpg")));
+        add(background);
+        background.setLayout(null);
 
         JLabel lbuser = new JLabel("Tài khoản:");
-        lbuser.setFont(new Font("Tohoma", 1, 18));
-        lbuser.setForeground(new Color(204, 204, 204));
-        txtuser.setPreferredSize(new Dimension(70, 40));
-        txtuser.setFont(new Font("Tohoma", 0, 18));
+        lbuser.setBounds(80, 200, 150, 40);
+        lbuser.setFont(new Font("Tohoma", 1, 20));
+        lbuser.setForeground(new Color(255, 255, 255));
+
+        txtuser.setBounds(230, 200, 300, 40);
+        txtuser.setFont(new Font("Tohoma", 0, 20));
+
         JLabel lbpass = new JLabel("Mật khẩu:");
-        lbpass.setFont(new Font("Tohoma", 1, 18));
-        lbpass.setForeground(new Color(204, 204, 204));
-        txtpass.setPreferredSize(new Dimension(70, 40));
+        lbpass.setBounds(80, 260, 150, 40);
+        lbpass.setFont(new Font("Tohoma", 1, 20));
+        lbpass.setForeground(new Color(255, 255, 255));
+
+        txtpass.setBounds(230, 260, 300, 40);
         txtpass.setFont(new Font("Tohoma", 0, 24));
         txtpass.setEchoChar('*');
-        pnLabel.add(lbuser);
-        pnText.add(txtuser);
-        pnLabel.add(lbpass);
-        pnText.add(txtpass);
 
-        JLabel lbImg = new JLabel();
-        lbImg.setBounds(480, 50, 150, 150);
-//        lbImg.setIcon(new ImageIcon(getClass().getResource("/img/key.png")));
-        pnCenter.add(lbImg);
+        background.add(lbuser);
+        background.add(txtuser);
+        background.add(lbpass);
+        background.add(txtpass);
 
-        ckbSee.setBounds(220, 227, 200, 40);
-        ckbSee.setText("Hiện mật khẩu");
-        ckbSee.setBackground(new Color(23, 62, 78));
-        ckbSee.setFont(new Font("Tohoma", 2, 18));
+        ckbSee.setBounds(230, 330, 20, 20);
+        ckbSee.setBackground(new Color(63, 66, 71));
         ckbSee.setForeground(Color.white);
-        pnCenter.add(ckbSee);
+        background.add(ckbSee);
 
-        JPanel pnButton = new JPanel();
-        pnButton.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
-        pnButton.setBounds(170, 290, 300, 50);
-        pnButton.setBackground(new Color(23, 62, 78));
-        pnCenter.add(pnButton);
+        JLabel lbShowPass = new JLabel("Hiện mật khẩu");
+        lbShowPass.setBounds(255, 320, 150, 40);
+        lbShowPass.setFont(new Font("Tohoma", 3, 20));
+        lbShowPass.setForeground(new Color(255, 255, 255));
+        background.add(lbShowPass);
 
         JButton btnReset = new JButton("Hủy");
-        btnReset.setFont(new Font("Tohoma", 1, 18));
-        btnReset.setBackground(Color.red);
+        btnReset.setBounds(150, 400, 130, 40);
         btnReset.setPreferredSize(new Dimension(130, 40));
+        btnReset.setFont(new Font("Tohoma", 1, 20));
+        btnReset.setBackground(new java.awt.Color(90, 50, 30));
         btnReset.setForeground(Color.white);
         btnReset.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+
         JButton btnOK = new JButton("Đăng nhập");
-        btnOK.setFont(new Font("Tohoma", 1, 18));
-        btnOK.setBackground(new Color(102, 204, 255));
-        btnOK.setPreferredSize(new Dimension(130, 40));
+        btnOK.setBounds(300, 400, 130, 40);
+        btnOK.setFont(new Font("Tohoma", 1, 20));
+        btnOK.setBackground(new Color(236, 177, 51));
         btnOK.setForeground(Color.white);
         btnOK.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
-        pnButton.add(btnReset);
-        pnButton.add(btnOK);
+        background.add(btnReset);
+        background.add(btnOK);
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -113,13 +86,13 @@ public class Login extends JFrame {
                 btOKMouseClicked(evt);
             }
         });
-        
+
         btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btResetMouseClicked(evt);
             }
         });
-        
+
         ckbSee.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -157,11 +130,10 @@ public class Login extends JFrame {
     }
 
     private void btOKMouseClicked(java.awt.event.MouseEvent evt) {
+        ArrayList<AccountDTO> acc = new ArrayList<>();
         String username = txtuser.getText();
         String password = txtpass.getText();
-        String user = "root";
-        String pass = "123456";
-        String url = "jdbc:mysql://localhost:3306/qlbanhang?useUnicode=yes&characterEncoding=UTF-8";
+
         if (username.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập username");
             txtuser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
@@ -172,27 +144,20 @@ public class Login extends JFrame {
             txtpass.requestFocus();
         } else {
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conn = (Connection) DriverManager.getConnection(url, user, pass);
-                String qry = "select * from users where Username='" + username + "' and Password='" + password + "'";
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(qry);
-                if (rs.next()) {
-                    JOptionPane.showMessageDialog(panel, "Đăng nhập thành công!", "Lời nhắn", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/img/thanhcong.png")));
-                    Home home = new Home();
-                    this.setVisible(false);
-                    home.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(panel, "Username hoặc Password sai. Vui lòng nhập lại!", "Lời nhắn", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(getClass().getResource("/img/message.jpg")));
-                    txtuser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
-                    txtpass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
-                    txtuser.requestFocus();
+                LoginBUS loginBus = new LoginBUS();
+                acc = loginBus.checkLogin(username, password);
+                for (AccountDTO account : acc) {
+                    if (account.roleId == 1) {
+                        Home home = new Home();
+                        this.setVisible(false);
+                        home.setVisible(true);
+                    } else if (account.roleId == 2) {
+                        Order order = new Order();
+                        this.setVisible(false);
+                        order.setVisible(true);
+                    }
                 }
-                conn.close();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception e) {
             }
         }
     }
