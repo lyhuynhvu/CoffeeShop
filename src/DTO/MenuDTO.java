@@ -4,14 +4,14 @@ public class MenuDTO {
     public int id;
     public String name;
     public int type;
-    public float price;
+    public int price;
     public String status;
     public String image;
 
     public MenuDTO() {
     }
 
-    public MenuDTO(int id, String name, int type, float price, String status, String image) {
+    public MenuDTO(int id, String name, int type, int price, String status, String image) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -44,11 +44,11 @@ public class MenuDTO {
         this.type = type;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

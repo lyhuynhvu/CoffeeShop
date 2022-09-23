@@ -28,35 +28,35 @@ public class Home extends JFrame {
         JLabel lblhear = new JLabel("COFFEE SHOP");
         lblhear.setForeground(Color.WHITE);
         lblhear.setBounds(666, 10, 500, 30);
-        lblhear.setFont(new Font("Tohoma", 1, 20));
+        lblhear.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
         head.add(lblhear);
 
         JButton btnMenu = new JButton("SẢN PHẨM");
         btnMenu.setForeground(new Color(90, 50, 30));
         btnMenu.setBackground(Color.WHITE);
         btnMenu.setBounds(0, 50, 375, 50);
-        btnMenu.setFont(new Font("Tohoma", 1, 20));
+        btnMenu.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         head.add(btnMenu);
 
         JButton btnStaff = new JButton("NHÂN VIÊN");
         btnStaff.setForeground(new Color(90, 50, 30));
         btnStaff.setBackground(Color.WHITE);
         btnStaff.setBounds(375, 50, 375, 50);
-        btnStaff.setFont(new Font("Tohoma", 1, 20));
+        btnStaff.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         head.add(btnStaff);
 
         JButton btnBill = new JButton("HÓA ĐƠN");
         btnBill.setForeground(new Color(90, 50, 30));
         btnBill.setBackground(Color.WHITE);
         btnBill.setBounds(750, 50, 375, 50);
-        btnBill.setFont(new Font("Tohoma", 1, 20));
+        btnBill.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         head.add(btnBill);
 
         JButton btnReport = new JButton("DOANH THU");
         btnReport.setForeground(new Color(90, 50, 30));
         btnReport.setBackground(Color.WHITE);
         btnReport.setBounds(1125, 50, 375, 50);
-        btnReport.setFont(new Font("Tohoma", 1, 20));
+        btnReport.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         head.add(btnReport);
 
         pnMain.add(head, BorderLayout.NORTH);

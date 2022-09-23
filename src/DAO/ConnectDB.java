@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 public class ConnectDB {
     String user = "root";
-    String pass = "123456";
+    String pass = "";
     String url = "jdbc:mysql://localhost:3306/coffeeshop?useUnicode=yes&characterEncoding=UTF-8";
     Connection conn = null;
     Statement st = null;
@@ -14,7 +14,7 @@ public class ConnectDB {
 
     public void getConnect() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             conn = (Connection) DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Lỗi kết nối database");
