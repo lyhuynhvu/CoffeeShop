@@ -4,12 +4,12 @@ public class BillDTO {
     public int id;
     public String createAt;
     public String createBy;
-    public float total;
+    public int total;
 
     public BillDTO() {
     }
 
-    public BillDTO(int id, String createAt, String createBy, float total) {
+    public BillDTO(int id, String createAt, String createBy, int total) {
         this.id = id;
         this.createAt = createAt;
         this.createBy = createBy;
@@ -40,11 +40,11 @@ public class BillDTO {
         this.createBy = createBy;
     }
 
-    public float getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(int total) {
         this.total = total;
     }
     

@@ -16,7 +16,7 @@ public class MenuManagement extends JPanel {
     private JTextField txtSearchName = new JTextField("", 280);
     String status[] = {"Trạng Thái", "Đang Bán", "Ngừng Bán"};
     private JComboBox cbxStatus = new JComboBox(status);
-    public static JTable tblSP = new JTable() {
+    public static JTable tblNV = new JTable() {
         public Class getColumnClass(int column) {
             if (column == 5) {
                 return Icon.class;
@@ -110,15 +110,15 @@ public class MenuManagement extends JPanel {
         lblMenu.setFont(new Font(Font.MONOSPACED, 3, 22));
         menuCenter.add(lblMenu);
 
-        JScrollPane scroll = new JScrollPane(tblSP);
+        JScrollPane scroll = new JScrollPane(tblNV);
         scroll.setBounds(new Rectangle(60, 100, 1000, 700));
-        tblSP.getTableHeader().setOpaque(false);
-        tblSP.getTableHeader().setBackground(new Color(236, 177, 51));
-        tblSP.getTableHeader().setForeground(Color.white);
-        tblSP.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 16));
-        tblSP.setFont(new Font("Times New Roman", 0, 18));
-        tblSP.setSelectionBackground(new Color(244, 223, 125));
-        tblSP.setRowHeight(100);
+        tblNV.getTableHeader().setOpaque(false);
+        tblNV.getTableHeader().setBackground(new Color(236, 177, 51));
+        tblNV.getTableHeader().setForeground(Color.white);
+        tblNV.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 16));
+        tblNV.setFont(new Font("Times New Roman", 0, 18));
+        tblNV.setSelectionBackground(new Color(244, 223, 125));
+        tblNV.setRowHeight(100);
         menuCenter.add(scroll);
 
         pnMenu.add(menuCenter, BorderLayout.CENTER);
@@ -137,7 +137,7 @@ public class MenuManagement extends JPanel {
                 formMenu.show();
             }
         });
-        
+
         btnUpdate.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 FormMenu formMenu = new FormMenu("update");
@@ -169,7 +169,7 @@ public class MenuManagement extends JPanel {
         if (stt != "Trạng Thái") {
             listSP = menuBUS.searchByStatus(stt);
             if (listSP.size() == 0) {
-                JOptionPane.showMessageDialog(panel, "Không có sản phẩm nào ở trạng thái " + status, "Lời nhắn", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(panel, "Không có sản phẩm nào ở trạng thái " + stt, "Lời nhắn", JOptionPane.INFORMATION_MESSAGE);
             }
         }
 
@@ -196,7 +196,7 @@ public class MenuManagement extends JPanel {
             row.add(new ImageIcon(getClass().getResource("/images/" + menuDTO.image)));
 
             model.addRow(row);
-            tblSP.setModel(model);
+            tblNV.setModel(model);
         }
     }
 }

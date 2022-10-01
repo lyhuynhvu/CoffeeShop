@@ -3,15 +3,15 @@ package DTO;
 public class BillDetailDTO {
     public int id;
     public int billId;
-    public int item;
+    public String item;
     public int quanity;
-    public float subtotal;
+    public int subtotal;
     public String note;
 
     public BillDetailDTO() {
     }
 
-    public BillDetailDTO(int id, int billId, int item, int quanity, float subtotal, String note) {
+    public BillDetailDTO(int id, int billId, String item, int quanity, int subtotal, String note) {
         this.id = id;
         this.billId = billId;
         this.item = item;
@@ -36,11 +36,11 @@ public class BillDetailDTO {
         this.billId = billId;
     }
 
-    public int getItem() {
+    public String getItem() {
         return item;
     }
 
-    public void setItem(int item) {
+    public void setItem(String item) {
         this.item = item;
     }
 
@@ -52,11 +52,11 @@ public class BillDetailDTO {
         this.quanity = quanity;
     }
 
-    public float getSubtotal() {
+    public int getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(float subtotal) {
+    public void setSubtotal(int subtotal) {
         this.subtotal = subtotal;
     }
 
