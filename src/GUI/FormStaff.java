@@ -149,11 +149,13 @@ public class FormStaff extends JFrame {
                 btOKMouseClicked(evt);
             }
         });
+        
         btnCancel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 setVisible(false);
             }
         });
+        
         btnReset.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 txtFullname.setText("");
@@ -172,6 +174,7 @@ public class FormStaff extends JFrame {
                 }
             }
         });
+        
         txtPhone.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -179,6 +182,7 @@ public class FormStaff extends JFrame {
                 }
             }
         });
+        
         txtEmail.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {

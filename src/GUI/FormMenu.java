@@ -115,7 +115,7 @@ public class FormMenu extends JFrame {
         pnButton.add(btnCancel);
 
         lblImg.setBounds(510, 20, 125, 125);
-        lblImg.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblImg.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
         pnSP.add(lblImg);
 
         JButton btnChooseImg = new JButton("Chọn file");
@@ -138,24 +138,28 @@ public class FormMenu extends JFrame {
                 btOKMouseClicked(evt);
             }
         });
+        
         btnChooseImg.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 btChooseImgMouseClicked(evt);
             }
         });
+        
         btnCancel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 setVisible(false);
             }
         });
-        btnType.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        
+        btnType.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 TableMenuType tbl = new TableMenuType();
                 tbl.setVisible(true);
             }
         });
-        btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        
+        btnReset.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 txtName.setText("");
                 txtPrice.setText("");
                 txtType.setText("");
@@ -164,8 +168,8 @@ public class FormMenu extends JFrame {
         });
 
         //sự kiện phím enter
-        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        txtName.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     txtPrice.requestFocus();
                 }
@@ -213,7 +217,7 @@ public class FormMenu extends JFrame {
         }
     }
 
-    private void btOKMouseClicked(java.awt.event.MouseEvent evt) {
+    private void btOKMouseClicked(MouseEvent evt) {
         MenuDTO menuDTO = new MenuDTO();
         menuDTO.name = txtName.getText();
         menuDTO.price = Integer.parseInt(txtPrice.getText());
@@ -270,6 +274,7 @@ public class FormMenu extends JFrame {
 
         Pattern patternDG = Pattern.compile("\\d*");
         Matcher matcherDG = patternDG.matcher(price);
+        
         if (price.equals("")) {
             txtPrice.setBorder(BorderFactory.createLineBorder(new Color(255, 51, 51)));
             ThongBao += "Bạn chưa nhập đơn giá \n";
@@ -285,16 +290,16 @@ public class FormMenu extends JFrame {
             txtType.requestFocus();
         }
         if (img.equals("")) {
-            txtImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+            txtImage.setBorder(BorderFactory.createLineBorder(new Color(255, 51, 51)));
             ThongBao += "Bạn chưa chọn hình \n";
             txtImage.requestFocus();
         }
         if (ThongBao.equals("")) {
             kiemtra = true;
-            txtName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-            txtPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-            txtType.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-            txtImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+            txtName.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+            txtPrice.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+            txtType.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+            txtImage.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
         } else {
             kiemtra = false;
             ThongBao(ThongBao, "lỗi nhập liệu", 2);
@@ -306,8 +311,4 @@ public class FormMenu extends JFrame {
         JOptionPane.showMessageDialog(new JFrame(), noiDungThongBao,
                 tieuDeThongBao, icon);
     }
-
-//    public static void main(String[] args) {
-//        new FormMenu("create");
-//    }
 }

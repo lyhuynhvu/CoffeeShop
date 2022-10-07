@@ -113,4 +113,27 @@ public class MenuDAO extends ConnectDB {
 
         }
     }
+    
+    public ArrayList<MenuDTO> getMenuByType(int type) {
+        ArrayList dssp = new ArrayList<MenuDTO>();
+        try {
+            getConnect();
+            String qry = "select * from menu where type = " + type;
+            st = conn.createStatement();
+            rs = st.executeQuery(qry);
+            while (rs.next()) {
+                MenuDTO sp = new MenuDTO();
+                sp.id = rs.getInt(1);
+                sp.name = rs.getString(2);
+                sp.price = rs.getInt(3);
+                sp.type = rs.getInt(4);
+                sp.image = rs.getString(5);
+                sp.status = rs.getString(6);
+                dssp.add(sp);
+            }
+            closeConnect();
+        } catch (Exception e) {
+        }
+        return dssp;
+    }
 }

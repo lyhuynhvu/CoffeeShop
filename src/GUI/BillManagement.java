@@ -7,11 +7,7 @@ import DTO.BillDetailDTO;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Vector;
-import java.util.logging.*;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -119,23 +115,7 @@ public class BillManagement extends JPanel {
                 int i = tblBill.getSelectedRow();
             }
         });
-//        btnXuat.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent ae) {
-//                IEBill i=new IEBill();
-//                try {
-//                    i.run();
-//                    JOptionPane.showMessageDialog(null, "Xuất hóa đơn thành công !!!");
-//                } catch (IOException ex) {
-//                    Logger.getLogger(HoaDonGUI.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
-//        btnTim.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                btTimMouseClicked(evt);
-//            }
-//        });
+        
         btnViewDetail.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 btViewMouseClicked(evt);

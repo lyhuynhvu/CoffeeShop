@@ -118,7 +118,7 @@ public class MenuManagement extends JPanel {
         tblNV.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 16));
         tblNV.setFont(new Font("Times New Roman", 0, 18));
         tblNV.setSelectionBackground(new Color(244, 223, 125));
-        tblNV.setRowHeight(100);
+        tblNV.setRowHeight(150);
         menuCenter.add(scroll);
 
         pnMenu.add(menuCenter, BorderLayout.CENTER);

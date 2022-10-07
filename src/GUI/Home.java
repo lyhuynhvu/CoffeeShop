@@ -157,8 +157,4 @@ public class Home extends JFrame {
         fatherPanel.repaint();  // vẽ lại một thành phần con mà nó đã gọi
         fatherPanel.revalidate();
     }
-
-    public static void main(String[] args) {
-        new Home();
-    }
 }
