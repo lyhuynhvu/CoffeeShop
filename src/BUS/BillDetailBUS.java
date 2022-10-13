@@ -15,4 +15,9 @@ public class BillDetailBUS {
         dsDetail= data.docDSDetail(billId);
         return dsDetail;
     }
+    
+    public void create(int parentId, int itemId, int quanity, int sub){
+        BillDetailDAO data= new BillDetailDAO();
+        data.create(parentId, itemId, quanity, sub);
+    }
 }

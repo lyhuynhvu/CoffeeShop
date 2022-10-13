@@ -7,15 +7,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BillDAO extends ConnectDB {
-    public ArrayList docDSBill(){
-        ArrayList dsBill= new ArrayList<BillDTO>();
-        try{
+
+    public ArrayList docDSBill() {
+        ArrayList dsBill = new ArrayList<BillDTO>();
+        try {
             getConnect();
-            String qry="SELECT b.id, b.create_at, s.full_name, b.total FROM bill AS b LEFT JOIN staff AS s ON b.create_by = s.id WHERE b.create_by=s.id;";
-            st=conn.createStatement();
-            rs= st.executeQuery(qry);
-            while(rs.next()){
-                BillDTO bill= new BillDTO();
+            String qry = "SELECT b.id, b.create_at, s.full_name, b.total FROM bill AS b LEFT JOIN staff AS s ON b.create_by = s.id WHERE b.create_by=s.id;";
+            st = conn.createStatement();
+            rs = st.executeQuery(qry);
+            while (rs.next()) {
+                BillDTO bill = new BillDTO();
                 bill.id = rs.getInt(1);
                 bill.createAt = rs.getString(2);
                 bill.createBy = rs.getString(3);
@@ -27,5 +28,36 @@ public class BillDAO extends ConnectDB {
             Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return dsBill;
+    }
+
+    public void create(int total) {
+        try {
+            getConnect();
+            String qry = "Insert into bill (total) values(";
+            qry += total;
+            qry += ")";
+            st = conn.createStatement();
+            st.executeUpdate(qry);
+            closeConnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int getTheLast() {
+        int idBill = 0;
+        try {
+            getConnect();
+            String qry = "SELECT id FROM bill ORDER BY ID DESC LIMIT 1";
+            st = conn.createStatement();
+            rs = st.executeQuery(qry);
+            while (rs.next()) {
+                idBill = rs.getInt(1);
+            }
+            closeConnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idBill;
     }
 }

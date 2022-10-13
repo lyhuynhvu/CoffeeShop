@@ -1,16 +1,25 @@
 package GUI;
 
+import BUS.BillBUS;
+import BUS.BillDetailBUS;
 import BUS.MenuBUS;
+import DTO.DetailBillMenuDTO;
 import DTO.MenuDTO;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.*;
 
 public class Order extends JFrame {
+
+    private JPanel pnBill = new JPanel();
     private JPanel pnCenter = new JPanel();
     private ArrayList<MenuDTO> listMenu = new ArrayList<>();
+    DetailBillMenuDTO[] orderList = new DetailBillMenuDTO[1];
+    private int orderTime = 0;
+    private JLabel lbTotal = new JLabel("0");
 
     public Order() {
         init();
@@ -76,7 +85,6 @@ public class Order extends JFrame {
         pnOrder.add(type, BorderLayout.NORTH);
 
         // ===== CENTER =====
-        
         pnCenter.setLayout(new GridLayout(2, 2));
         pnCenter.setPreferredSize(new Dimension(1000, 850));
         pnCenter.setBackground(new Color(255, 255, 255));
@@ -94,17 +102,27 @@ public class Order extends JFrame {
         lblAdd.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         addBill.add(lblAdd);
 
+        pnBill.setLayout(new BoxLayout(pnBill, 1));
+        pnBill.setBounds(10, 100, 464, 550);
+        addBill.add(pnBill);
+
+        JLabel lbTotalTitle = new JLabel("Tổng tiền:");
+        lbTotalTitle.setForeground(new Color(90, 50, 30));
+        lbTotalTitle.setBounds(20, 650, 200, 50);
+        lbTotalTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+        addBill.add(lbTotalTitle);
+
+        lbTotal.setForeground(new Color(90, 50, 30));
+        lbTotal.setBounds(400, 650, 200, 50);
+        lbTotal.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+        addBill.add(lbTotal);
+
         JButton btnAdd = new JButton("TẠO HÓA ĐƠN");
         btnAdd.setForeground(new Color(90, 50, 30));
         btnAdd.setBackground(Color.WHITE);
         btnAdd.setBounds(150, 720, 200, 50);
         btnAdd.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         addBill.add(btnAdd);
-        
-        JPanel pnBill = new JPanel();
-        pnBill.setLayout(new BoxLayout(pnBill, 1));
-        pnBill.setBounds(10, 100, 464, 600);
-        addBill.add(pnBill);
 
         pnOrder.add(addBill, BorderLayout.EAST);
 
@@ -149,7 +167,7 @@ public class Order extends JFrame {
                 renderView();
             }
         });
-        
+
         btnMilkTea.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 btnMilkTea.setForeground(Color.WHITE);
@@ -168,7 +186,7 @@ public class Order extends JFrame {
                 renderView();
             }
         });
-        
+
         btnSmoothie.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 btnSmoothie.setForeground(Color.WHITE);
@@ -187,7 +205,7 @@ public class Order extends JFrame {
                 renderView();
             }
         });
-        
+
         btnJuice.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 btnJuice.setForeground(Color.WHITE);
@@ -206,7 +224,7 @@ public class Order extends JFrame {
                 renderView();
             }
         });
-        
+
         btnFizzy.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 btnFizzy.setForeground(Color.WHITE);
@@ -223,6 +241,23 @@ public class Order extends JFrame {
                 btnCoffee.setForeground(new Color(236, 177, 51));
                 getMenuData(6);
                 renderView();
+            }
+        });
+        
+        btnAdd.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                int sum = Integer.parseInt(lbTotal.getText());
+                BillBUS bill = new BillBUS();
+                bill.create(sum);
+                
+                int parentId = bill.getTheLast();
+                for (int i = 0; i < orderList.length; i++) {
+                    int itemId = orderList[i].getIdItem();
+                    int quantity = orderList[i].getQuantity();
+                    int sub = orderList[i].getPrice() * orderList[i].getQuantity();
+                    BillDetailBUS billDetail = new BillDetailBUS();
+                    billDetail.create(parentId, itemId, quantity, sub);
+                }
             }
         });
     }
@@ -264,11 +299,139 @@ public class Order extends JFrame {
 
             btnItem.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent evt) {
-                    System.out.println(menu.name);
+                    handleOrderList(menu.id, menu.name, menu.price);
                 }
             });
         }
         switchPanel(pnCenter, pnView);
+    }
+
+    public void handleOrderList(int id, String name, int price) {
+        boolean trung = false;
+        if (orderTime == 0) {
+            orderList = new DetailBillMenuDTO[1];
+            orderList[0] = new DetailBillMenuDTO(id, name, price, 1);
+            orderTime++;
+        } else {
+            int len = orderList.length;
+            for (int i = 0; i < len; i++) {
+                if (orderList[i].getIdItem() == id) {
+                    int quan = orderList[i].getQuantity();
+                    orderList[i].setQuantity(quan + 1);
+                    trung = true;
+                    break;
+                } else {
+                    trung = false;
+                }
+            }
+
+            if (trung == false) {
+                orderList = Arrays.copyOf(orderList, len + 1);
+                orderList[len] = new DetailBillMenuDTO(id, name, price, 1);
+            }
+        }
+
+        renderOrder();
+    }
+
+    public void renderOrder() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, 1));
+        panel.setPreferredSize(new Dimension(464, 600));
+        int tong = 0;
+
+        for (int i = 0; i < orderList.length; i++) {
+            JPanel pnItem = new JPanel();
+            pnItem.setLayout(null);
+
+            JLabel lbName = new JLabel(orderList[i].getName());
+            lbName.setBounds(0, 0, 150, 50);
+            lbName.setBackground(Color.pink);
+            JLabel lbQuan = new JLabel(String.valueOf(orderList[i].getQuantity()));
+            lbQuan.setBounds(220, 0, 20, 50);
+            lbQuan.setBackground(Color.lightGray);
+            JButton btnIncrease = new JButton("+");
+            btnIncrease.setBounds(250, 0, 50, 40);
+            btnIncrease.setBackground(Color.white);
+            JButton btnDecrease = new JButton("-");
+            btnDecrease.setBounds(160, 0, 50, 40);
+            btnDecrease.setBackground(Color.white);
+            int subPrice = orderList[i].getPrice() * orderList[i].getQuantity();
+            JLabel lbPrice = new JLabel(String.valueOf(subPrice));
+            lbPrice.setBackground(Color.cyan);
+            lbPrice.setBounds(400, 0, 100, 50);
+            pnItem.add(lbName);
+            pnItem.add(btnIncrease);
+            pnItem.add(lbQuan);
+            pnItem.add(btnDecrease);
+            pnItem.add(lbPrice);
+            panel.add(pnItem);
+
+            tong += subPrice;
+
+            final int y = i;
+            btnIncrease.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent evt) {
+                    clickBtnPlus(lbQuan, y, lbPrice);
+                }
+            });
+
+            btnDecrease.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent evt) {
+                    int itemQuan = Integer.parseInt(lbQuan.getText()) - 1;
+                    if (itemQuan == 0) {
+                        removeItem(y);
+                    } else {
+                        clickBtnTru(lbQuan, y, lbPrice);
+                    }
+                }
+            });
+        }
+
+        lbTotal.setText(String.valueOf(tong));
+        switchPanel(pnBill, panel);
+    }
+
+    public void clickBtnPlus(JLabel lbQuan, int y, JLabel lbPrice) {
+        int itemQuan = Integer.parseInt(lbQuan.getText()) + 1;
+        lbQuan.setText(String.valueOf(itemQuan));
+        orderList[y].setQuantity(itemQuan);
+        int subPrice = orderList[y].getPrice() * orderList[y].getQuantity();
+        lbPrice.setText(String.valueOf(subPrice));
+        
+        int tong =0;
+        for(int i = 0; i < orderList.length; i++) {
+            int sub = orderList[i].getPrice() * orderList[i].getQuantity();
+            tong += sub;
+        }
+        lbTotal.setText(String.valueOf(tong));
+    }
+
+    public void clickBtnTru(JLabel lbQuan, int y, JLabel lbPrice) {
+        int itemQuan = Integer.parseInt(lbQuan.getText()) - 1;
+        lbQuan.setText(String.valueOf(itemQuan));
+        orderList[y].setQuantity(itemQuan);
+        int subPrice = orderList[y].getPrice() * orderList[y].getQuantity();
+        lbPrice.setText(String.valueOf(subPrice));
+        
+        int tong =0;
+        for(int i = 0; i < orderList.length; i++) {
+            int sub = orderList[i].getPrice() * orderList[i].getQuantity();
+            tong += sub;
+        }
+        lbTotal.setText(String.valueOf(tong));
+    }
+
+    public void removeItem(int i) {
+        int len = orderList.length;
+        DetailBillMenuDTO[] tmp = new DetailBillMenuDTO[len - 1];
+
+        System.arraycopy(orderList, 0, tmp, 0, i);
+        System.arraycopy(orderList, i + 1, tmp, i, len - i - 1);
+
+        orderList = Arrays.copyOf(tmp, len - 1);
+
+        renderOrder();
     }
 
     public void switchPanel(JPanel fatherPanel, JPanel childPanel) {
@@ -279,5 +442,9 @@ public class Order extends JFrame {
         fatherPanel.add(childPanel);
         fatherPanel.repaint();  // vẽ lại một thành phần con mà nó đã gọi
         fatherPanel.revalidate();
+    }
+
+    public static void main(String arg[]) {
+        new Order();
     }
 }

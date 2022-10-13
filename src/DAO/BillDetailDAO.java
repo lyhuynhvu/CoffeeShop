@@ -30,4 +30,21 @@ public class BillDetailDAO extends ConnectDB {
         }
         return dsDetail;
     }
+    
+    public void create(int parentId, int itemId, int quanity, int sub) {
+        try {
+            getConnect();
+            String qry = "Insert into bill_detail (parent_id, item, quantity, subtotal) values(";
+            qry += parentId;
+            qry += ", " + itemId;
+            qry += ", " + quanity;
+            qry += ", " + sub;
+            qry += ")";
+            st = conn.createStatement();
+            st.executeUpdate(qry);
+            closeConnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

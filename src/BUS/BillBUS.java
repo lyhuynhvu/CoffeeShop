@@ -15,4 +15,15 @@ public class BillBUS {
         dshd= data.docDSBill();
         return dshd;
     }
+    
+    public void create(int total){
+        BillDAO data= new BillDAO();
+        data.create(total);
+    }
+    
+    public int getTheLast() {
+        BillDAO data = new BillDAO();
+        int idBill = data.getTheLast();
+        return idBill;
+    }
 }
