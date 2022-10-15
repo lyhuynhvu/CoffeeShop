@@ -179,11 +179,11 @@ public class FormMenu extends JFrame {
 
     public void loadForm() {
         try {
-            int i = MenuManagement.tblNV.getSelectedRow();
-            txtName.setText(MenuManagement.tblNV.getModel().getValueAt(i, 1).toString());
-            txtPrice.setText(MenuManagement.tblNV.getModel().getValueAt(i, 2).toString());
-            txtType.setText(MenuManagement.tblNV.getModel().getValueAt(i, 3).toString());
-            String stt = MenuManagement.tblNV.getModel().getValueAt(i, 4).toString();
+            int i = MenuManagement.tblMenu.getSelectedRow();
+            txtName.setText(MenuManagement.tblMenu.getModel().getValueAt(i, 1).toString());
+            txtPrice.setText(MenuManagement.tblMenu.getModel().getValueAt(i, 2).toString());
+            txtType.setText(MenuManagement.tblMenu.getModel().getValueAt(i, 3).toString());
+            String stt = MenuManagement.tblMenu.getModel().getValueAt(i, 4).toString();
             if (stt.equals("Đang Bán")) {
                 rbtActive.setSelected(true);
                 rbtInactive.setSelected(false);
@@ -191,7 +191,7 @@ public class FormMenu extends JFrame {
                 rbtActive.setSelected(false);
                 rbtInactive.setSelected(true);
             }
-            String img = MenuManagement.tblNV.getModel().getValueAt(i, 5).toString();
+            String img = MenuManagement.tblMenu.getModel().getValueAt(i, 5).toString();
             txtImage.setText(img.substring(62));
             lblImg.setIcon(new ImageIcon(getClass().getResource("/images/" + img.substring(62))));
         } catch (Exception e) {
@@ -244,8 +244,8 @@ public class FormMenu extends JFrame {
         } else {
             boolean val = validate(1);
             if (val) {
-                int i = MenuManagement.tblNV.getSelectedRow();
-                menuDTO.id = Integer.parseInt(MenuManagement.tblNV.getModel().getValueAt(i, 0).toString());
+                int i = MenuManagement.tblMenu.getSelectedRow();
+                menuDTO.id = Integer.parseInt(MenuManagement.tblMenu.getModel().getValueAt(i, 0).toString());
                 menuBus.update(menuDTO);
                 JOptionPane.showMessageDialog(panel, "Sửa thành công!", "Lời nhắn", JOptionPane.INFORMATION_MESSAGE);
             } else {

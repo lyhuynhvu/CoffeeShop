@@ -16,7 +16,7 @@ public class MenuManagement extends JPanel {
     private JTextField txtSearchName = new JTextField("", 280);
     String status[] = {"Trạng Thái", "Đang Bán", "Ngừng Bán"};
     private JComboBox cbxStatus = new JComboBox(status);
-    public static JTable tblNV = new JTable() {
+    public static JTable tblMenu = new JTable() {
         public Class getColumnClass(int column) {
             if (column == 5) {
                 return Icon.class;
@@ -110,15 +110,15 @@ public class MenuManagement extends JPanel {
         lblMenu.setFont(new Font(Font.MONOSPACED, 3, 22));
         menuCenter.add(lblMenu);
 
-        JScrollPane scroll = new JScrollPane(tblNV);
+        JScrollPane scroll = new JScrollPane(tblMenu);
         scroll.setBounds(new Rectangle(60, 100, 1000, 700));
-        tblNV.getTableHeader().setOpaque(false);
-        tblNV.getTableHeader().setBackground(new Color(236, 177, 51));
-        tblNV.getTableHeader().setForeground(Color.white);
-        tblNV.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 16));
-        tblNV.setFont(new Font("Times New Roman", 0, 18));
-        tblNV.setSelectionBackground(new Color(244, 223, 125));
-        tblNV.setRowHeight(150);
+        tblMenu.getTableHeader().setOpaque(false);
+        tblMenu.getTableHeader().setBackground(new Color(236, 177, 51));
+        tblMenu.getTableHeader().setForeground(Color.white);
+        tblMenu.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 16));
+        tblMenu.setFont(new Font("Times New Roman", 0, 18));
+        tblMenu.setSelectionBackground(new Color(244, 223, 125));
+        tblMenu.setRowHeight(150);
         menuCenter.add(scroll);
 
         pnMenu.add(menuCenter, BorderLayout.CENTER);
@@ -196,7 +196,7 @@ public class MenuManagement extends JPanel {
             row.add(new ImageIcon(getClass().getResource("/images/" + menuDTO.image)));
 
             model.addRow(row);
-            tblNV.setModel(model);
+            tblMenu.setModel(model);
         }
     }
 }

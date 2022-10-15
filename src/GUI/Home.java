@@ -52,7 +52,7 @@ public class Home extends JFrame {
         btnBill.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         head.add(btnBill);
 
-        JButton btnReport = new JButton("DOANH THU");
+        JButton btnReport = new JButton("THỐNG KÊ");
         btnReport.setForeground(new Color(90, 50, 30));
         btnReport.setBackground(Color.WHITE);
         btnReport.setBounds(1125, 50, 375, 50);
@@ -156,5 +156,9 @@ public class Home extends JFrame {
         fatherPanel.add(childPanel);
         fatherPanel.repaint();  // vẽ lại một thành phần con mà nó đã gọi
         fatherPanel.revalidate();
+    }
+    
+    public static void main(String arg[]) {
+        new Home();
     }
 }
