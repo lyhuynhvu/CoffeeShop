@@ -6,10 +6,15 @@ import BUS.MenuBUS;
 import DTO.DetailBillMenuDTO;
 import DTO.MenuDTO;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class Order extends JFrame {
@@ -257,6 +262,14 @@ public class Order extends JFrame {
                     int sub = orderList[i].getPrice() * orderList[i].getQuantity();
                     BillDetailBUS billDetail = new BillDetailBUS();
                     billDetail.create(parentId, itemId, quantity, sub);
+                }
+                
+                ExportBill e = new ExportBill();
+                try {
+                    e.run(parentId);
+                    JOptionPane.showMessageDialog(null, "Xuất hóa đơn thành công !!!");
+                } catch (IOException ex) {
+                    Logger.getLogger(Order.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
