@@ -35,7 +35,7 @@ public class StaffBUS {
         data.create(staffDTO);
         dsStaff.add(staffDTO);
     }
-    
+
     public void update(StaffDTO staffDTO) {
         StaffDAO data = new StaffDAO();
         data.update(staffDTO);

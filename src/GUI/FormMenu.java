@@ -6,8 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.io.File;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -17,7 +16,6 @@ public class FormMenu extends JFrame {
 
     private DefaultTableModel model = new DefaultTableModel();
     private ArrayList<MenuDTO> listSP = new ArrayList<>();
-
     private JTextField txtName = new JTextField("", 20);
     private JTextField txtPrice = new JTextField("", 20);
     public static JTextField txtType = new JTextField("", 20);
@@ -127,8 +125,6 @@ public class FormMenu extends JFrame {
         txtImage.setEditable(false);
         pnSP.add(txtImage);
 
-        JFileChooser file = new JFileChooser();
-
         add(pnSP);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -138,26 +134,26 @@ public class FormMenu extends JFrame {
                 btOKMouseClicked(evt);
             }
         });
-        
+
         btnChooseImg.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 btChooseImgMouseClicked(evt);
             }
         });
-        
+
         btnCancel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 setVisible(false);
             }
         });
-        
+
         btnType.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 TableMenuType tbl = new TableMenuType();
                 tbl.setVisible(true);
             }
         });
-        
+
         btnReset.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 txtName.setText("");
@@ -274,7 +270,7 @@ public class FormMenu extends JFrame {
 
         Pattern patternDG = Pattern.compile("\\d*");
         Matcher matcherDG = patternDG.matcher(price);
-        
+
         if (price.equals("")) {
             txtPrice.setBorder(BorderFactory.createLineBorder(new Color(255, 51, 51)));
             ThongBao += "Bạn chưa nhập đơn giá \n";
@@ -284,16 +280,19 @@ public class FormMenu extends JFrame {
             ThongBao += "Dữ liệu nhập không hợp lệ\n";
             txtPrice.requestFocus();
         }
+
         if (type.equals("")) {
             txtType.setBorder(BorderFactory.createLineBorder(new Color(255, 51, 51)));
             ThongBao += "Bạn chưa nhập mã loại sp \n";
             txtType.requestFocus();
         }
+
         if (img.equals("")) {
             txtImage.setBorder(BorderFactory.createLineBorder(new Color(255, 51, 51)));
             ThongBao += "Bạn chưa chọn hình \n";
             txtImage.requestFocus();
         }
+
         if (ThongBao.equals("")) {
             kiemtra = true;
             txtName.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
@@ -304,11 +303,11 @@ public class FormMenu extends JFrame {
             kiemtra = false;
             ThongBao(ThongBao, "lỗi nhập liệu", 2);
         }
+
         return kiemtra;
     }
 
     public void ThongBao(String noiDungThongBao, String tieuDeThongBao, int icon) {
-        JOptionPane.showMessageDialog(new JFrame(), noiDungThongBao,
-                tieuDeThongBao, icon);
+        JOptionPane.showMessageDialog(new JFrame(), noiDungThongBao, tieuDeThongBao, icon);
     }
 }

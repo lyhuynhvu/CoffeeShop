@@ -1,13 +1,14 @@
 package DTO;
 
 public class AccountDTO {
+
     public String username;
     public String password;
     public int roleId;
-    
+
     public AccountDTO() {
-        
     }
+
     public AccountDTO(String username, String password, int roleId) {
         this.username = username;
         this.password = password;

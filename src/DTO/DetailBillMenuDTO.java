@@ -1,6 +1,7 @@
 package DTO;
 
 public class DetailBillMenuDTO {
+
     private int idItem;
     private String name;
     private int price;
@@ -47,6 +48,4 @@ public class DetailBillMenuDTO {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    
 }

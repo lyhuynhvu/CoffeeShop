@@ -1,6 +1,7 @@
 package DTO;
 
 public class ReportMenuDTO {
+
     public int id;
     public String name;
     public int price;
@@ -57,5 +58,4 @@ public class ReportMenuDTO {
     public void setAmount(int amount) {
         this.amount = amount;
     }
-    
 }

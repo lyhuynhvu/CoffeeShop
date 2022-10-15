@@ -2,14 +2,8 @@ package GUI;
 
 import BUS.ReportMenuBUS;
 import DTO.ReportMenuDTO;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.*;
@@ -89,7 +83,6 @@ public class ReportManagement extends JPanel {
                     model.addRow(row);
                     tblTKSP.setModel(model);
                 }
-
             }
         });
 
@@ -127,5 +120,4 @@ public class ReportManagement extends JPanel {
             }
         });
     }
-
 }

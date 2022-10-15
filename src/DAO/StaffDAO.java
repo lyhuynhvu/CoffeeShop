@@ -3,7 +3,6 @@ package DAO;
 import DTO.StaffDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -109,8 +108,8 @@ public class StaffDAO extends ConnectDB {
             getConnect();
             String qry = "Update staff set";
             qry += " full_name='" + staff.fullname + "'";
-            qry += ",gender='" + staff.gender+ "'";
-            qry += ",phone='" + staff.phone+ "'";
+            qry += ",gender='" + staff.gender + "'";
+            qry += ",phone='" + staff.phone + "'";
             qry += ",email='" + staff.email + "'";
             qry += ",address='" + staff.address + "'";
             qry += ",status='" + staff.status + "'";
@@ -119,7 +118,6 @@ public class StaffDAO extends ConnectDB {
             st.executeUpdate(qry);
             closeConnect();
         } catch (Exception e) {
-
         }
     }
 }

@@ -2,23 +2,10 @@ package GUI;
 
 import BUS.ExportBillBUS;
 import DTO.ExportBillDTO;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
-
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 public class ExportBill {
@@ -35,6 +22,7 @@ public class ExportBill {
         style.setFillForegroundColor(IndexedColors.LIGHT_YELLOW.getIndex());
         style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         style.setAlignment(HorizontalAlignment.CENTER);
+
         return style;
     }
 
@@ -45,7 +33,6 @@ public class ExportBill {
     }
 
     public static void run(int parentId) throws IOException {
-
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Hóa đơn");
 
@@ -78,7 +65,7 @@ public class ExportBill {
         row.getCell(1).setCellValue("Nhân viên: " + list.get(0).getBy());
         sheet.addMergedRegion(new CellRangeAddress(3, 3, 1, 2));
         int n3 = sheet.getRow(3).getPhysicalNumberOfCells();
-        autosizeColumn(sheet, n1);
+        autosizeColumn(sheet, n3);
 
         row = sheet.createRow(4);
         styleBackground(workbook, cell, row);
@@ -131,16 +118,21 @@ public class ExportBill {
         row = sheet.createRow(rownum + 1);
         cell = row.createCell(0);
         cell.setCellStyle(createStyleForTitle(workbook));
+
         cell = row.createCell(1);
         cell.setCellValue("Tổng tiền:");
         cell.setCellStyle(createStyleForTitle(workbook));
+
         cell = row.createCell(2);
         cell.setCellStyle(createStyleForTitle(workbook));
+
         cell = row.createCell(3);
         cell.setCellStyle(createStyleForTitle(workbook));
+
         cell = row.createCell(4, CellType.NUMERIC);
         cell.setCellValue(list.get(0).getSum());
         cell.setCellStyle(createStyleForTitle(workbook));
+
         cell = row.createCell(5);
         cell.setCellStyle(createStyleForTitle(workbook));
 
@@ -164,7 +156,6 @@ public class ExportBill {
         FileOutputStream outFile = new FileOutputStream(file);
         workbook.write(outFile);
         System.out.println("Created file: " + file.getAbsolutePath());
-
     }
 
     private static HSSFCellStyle styleForHead(HSSFWorkbook workbook) {

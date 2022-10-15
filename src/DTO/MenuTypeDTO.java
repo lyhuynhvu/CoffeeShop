@@ -1,6 +1,7 @@
 package DTO;
 
 public class MenuTypeDTO {
+
     public int id;
     public String name;
     public String description;

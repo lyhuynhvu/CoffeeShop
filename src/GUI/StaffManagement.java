@@ -25,6 +25,7 @@ public class StaffManagement extends JPanel {
             }
         }
     };
+    
     private ArrayList<StaffDTO> listStaff = new ArrayList<>();
     public static StaffManagement smgt = new StaffManagement();
 

@@ -6,15 +6,10 @@ import BUS.MenuBUS;
 import DTO.DetailBillMenuDTO;
 import DTO.MenuDTO;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
+import java.util.logging.*;
 import javax.swing.*;
 
 public class Order extends JFrame {
@@ -66,7 +61,7 @@ public class Order extends JFrame {
         btnMilkTea.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         type.add(btnMilkTea);
 
-        JButton btnSmoothie = new JButton("Đá xay/Sinh tố");
+        JButton btnSmoothie = new JButton("Đá xay");
         btnSmoothie.setForeground(new Color(90, 50, 30));
         btnSmoothie.setBackground(Color.WHITE);
         btnSmoothie.setBounds(750, 0, 250, 50);
@@ -248,13 +243,13 @@ public class Order extends JFrame {
                 renderView();
             }
         });
-        
+
         btnAdd.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 int sum = Integer.parseInt(lbTotal.getText());
                 BillBUS bill = new BillBUS();
                 bill.create(sum);
-                
+
                 int parentId = bill.getTheLast();
                 for (int i = 0; i < orderList.length; i++) {
                     int itemId = orderList[i].getIdItem();
@@ -263,7 +258,7 @@ public class Order extends JFrame {
                     BillDetailBUS billDetail = new BillDetailBUS();
                     billDetail.create(parentId, itemId, quantity, sub);
                 }
-                
+
                 ExportBill e = new ExportBill();
                 try {
                     e.run(parentId);
@@ -284,7 +279,7 @@ public class Order extends JFrame {
         JPanel pnView = new JPanel();
         pnView.setLayout(new GridLayout(2, 2, 20, 20));
         pnView.setBackground(Color.white);
-        pnView.setSize(1000, 850);
+        pnView.setPreferredSize(new Dimension(1000, 850));
 
         for (MenuDTO menu : listMenu) {
             JButton btnItem = new JButton();
@@ -293,6 +288,7 @@ public class Order extends JFrame {
             if (menu.status == "Ngừng Bán") {
                 btnItem.setSelected(false);
             }
+
             JLabel lbImg = new JLabel();
             lbImg.setBounds(30, 30, 150, 150);
             lbImg.setIcon(new ImageIcon(getClass().getResource("/images/" + menu.image)));
@@ -316,6 +312,7 @@ public class Order extends JFrame {
                 }
             });
         }
+
         switchPanel(pnCenter, pnView);
     }
 
@@ -381,8 +378,8 @@ public class Order extends JFrame {
             panel.add(pnItem);
 
             tong += subPrice;
-
             final int y = i;
+
             btnIncrease.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent evt) {
                     clickBtnPlus(lbQuan, y, lbPrice);
@@ -411,12 +408,13 @@ public class Order extends JFrame {
         orderList[y].setQuantity(itemQuan);
         int subPrice = orderList[y].getPrice() * orderList[y].getQuantity();
         lbPrice.setText(String.valueOf(subPrice));
-        
-        int tong =0;
-        for(int i = 0; i < orderList.length; i++) {
+
+        int tong = 0;
+        for (int i = 0; i < orderList.length; i++) {
             int sub = orderList[i].getPrice() * orderList[i].getQuantity();
             tong += sub;
         }
+
         lbTotal.setText(String.valueOf(tong));
     }
 
@@ -426,12 +424,13 @@ public class Order extends JFrame {
         orderList[y].setQuantity(itemQuan);
         int subPrice = orderList[y].getPrice() * orderList[y].getQuantity();
         lbPrice.setText(String.valueOf(subPrice));
-        
-        int tong =0;
-        for(int i = 0; i < orderList.length; i++) {
+
+        int tong = 0;
+        for (int i = 0; i < orderList.length; i++) {
             int sub = orderList[i].getPrice() * orderList[i].getQuantity();
             tong += sub;
         }
+
         lbTotal.setText(String.valueOf(tong));
     }
 
@@ -455,9 +454,5 @@ public class Order extends JFrame {
         fatherPanel.add(childPanel);
         fatherPanel.repaint();  // vẽ lại một thành phần con mà nó đã gọi
         fatherPanel.revalidate();
-    }
-
-    public static void main(String arg[]) {
-        new Order();
     }
 }

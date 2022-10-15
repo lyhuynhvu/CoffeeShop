@@ -16,6 +16,7 @@ public class MenuManagement extends JPanel {
     private JTextField txtSearchName = new JTextField("", 280);
     String status[] = {"Trạng Thái", "Đang Bán", "Ngừng Bán"};
     private JComboBox cbxStatus = new JComboBox(status);
+
     public static JTable tblMenu = new JTable() {
         public Class getColumnClass(int column) {
             if (column == 5) {
@@ -25,6 +26,7 @@ public class MenuManagement extends JPanel {
             }
         }
     };
+
     private ArrayList<MenuDTO> listSP = new ArrayList<>();
     public static MenuManagement mngt = new MenuManagement();
 

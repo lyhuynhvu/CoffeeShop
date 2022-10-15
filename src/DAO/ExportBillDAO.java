@@ -1,12 +1,12 @@
 package DAO;
 
-
 import DTO.ExportBillDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExportBillDAO extends ConnectDB {
+
     public List<ExportBillDTO> bill(int parentId) {
         List<ExportBillDTO> list = new ArrayList<ExportBillDTO>();
         try {
@@ -26,10 +26,8 @@ public class ExportBillDAO extends ConnectDB {
                 e.by = rs.getString(7);
                 list.add(e);
             }
-
             closeConnect();
         } catch (SQLException ex) {
-            
         }
         return list;
     }

@@ -41,7 +41,7 @@ public class MenuBUS {
         data.update(menuDTO);
         dsmenu.add(menuDTO);
     }
-    
+
     public ArrayList<MenuDTO> getMenuByType(int type) {
         MenuDAO data = new MenuDAO();
         dsmenu = data.getMenuByType(type);

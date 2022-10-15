@@ -1,13 +1,13 @@
 package DAO;
 
-import DTO.MenuDTO;
 import DTO.ReportMenuDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ReportMenuDAO extends ConnectDB{
+public class ReportMenuDAO extends ConnectDB {
+
     public ArrayList reportMost() {
         ArrayList dsmenu = new ArrayList<ReportMenuDTO>();
         try {
@@ -29,7 +29,7 @@ public class ReportMenuDAO extends ConnectDB{
         }
         return dsmenu;
     }
-    
+
     public ArrayList reportNot() {
         ArrayList dsmenu = new ArrayList<ReportMenuDTO>();
         try {
@@ -51,7 +51,7 @@ public class ReportMenuDAO extends ConnectDB{
         }
         return dsmenu;
     }
-    
+
     public ArrayList reportLess() {
         ArrayList dsmenu = new ArrayList<ReportMenuDTO>();
         try {

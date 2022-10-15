@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MenuTypeDAO extends ConnectDB {
+
     public ArrayList<MenuTypeDTO> docDSMenuType() {
         ArrayList dsLoaisp = new ArrayList<MenuTypeDTO>();
         try {

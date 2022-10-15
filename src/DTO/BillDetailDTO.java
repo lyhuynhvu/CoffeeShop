@@ -1,6 +1,7 @@
 package DTO;
 
 public class BillDetailDTO {
+
     public int id;
     public int billId;
     public String item;
@@ -67,5 +68,4 @@ public class BillDetailDTO {
     public void setNote(String note) {
         this.note = note;
     }
-    
 }

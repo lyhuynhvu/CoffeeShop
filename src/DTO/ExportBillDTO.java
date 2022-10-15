@@ -1,6 +1,7 @@
 package DTO;
 
 public class ExportBillDTO {
+
     public String item;
     public int quanity;
     public int price;
@@ -77,6 +78,4 @@ public class ExportBillDTO {
     public void setSum(int sum) {
         this.sum = sum;
     }
-    
-    
 }

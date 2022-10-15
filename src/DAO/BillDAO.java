@@ -12,7 +12,7 @@ public class BillDAO extends ConnectDB {
         ArrayList dsBill = new ArrayList<BillDTO>();
         try {
             getConnect();
-            String qry = "SELECT b.id, b.create_at, s.full_name, b.total FROM bill AS b LEFT JOIN staff AS s ON b.create_by = s.id WHERE b.create_by=s.id;";
+            String qry = "SELECT * FROM bill";
             st = conn.createStatement();
             rs = st.executeQuery(qry);
             while (rs.next()) {
@@ -43,7 +43,7 @@ public class BillDAO extends ConnectDB {
             Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public int getTheLast() {
         int idBill = 0;
         try {

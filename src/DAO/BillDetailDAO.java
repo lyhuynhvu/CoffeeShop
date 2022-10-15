@@ -7,15 +7,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BillDetailDAO extends ConnectDB {
-    public ArrayList docDSDetail(int billId){
-        ArrayList dsDetail= new ArrayList<BillDetailDTO>();
-        try{
+
+    public ArrayList docDSDetail(int billId) {
+        ArrayList dsDetail = new ArrayList<BillDetailDTO>();
+        try {
             getConnect();
-            String qry="SELECT d.id, d.parent_id, m.name, d.quantity, d.subtotal, d.note FROM bill_detail as d LEFT JOIN menu as m ON d.item = m.id WHERE d.parent_id=" +billId;
-            st=conn.createStatement();
-            rs= st.executeQuery(qry);
-            while(rs.next()){
-                BillDetailDTO detail= new BillDetailDTO();
+            String qry = "SELECT d.id, d.parent_id, m.name, d.quantity, d.subtotal, d.note FROM bill_detail as d LEFT JOIN menu as m ON d.item = m.id WHERE d.parent_id=" + billId;
+            st = conn.createStatement();
+            rs = st.executeQuery(qry);
+            while (rs.next()) {
+                BillDetailDTO detail = new BillDetailDTO();
                 detail.id = rs.getInt(1);
                 detail.billId = rs.getInt(2);
                 detail.item = rs.getString(3);
@@ -30,7 +31,7 @@ public class BillDetailDAO extends ConnectDB {
         }
         return dsDetail;
     }
-    
+
     public void create(int parentId, int itemId, int quanity, int sub) {
         try {
             getConnect();

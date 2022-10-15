@@ -1,6 +1,7 @@
 package DTO;
 
 public class BillDTO {
+
     public int id;
     public String createAt;
     public String createBy;
@@ -47,5 +48,4 @@ public class BillDTO {
     public void setTotal(int total) {
         this.total = total;
     }
-    
 }

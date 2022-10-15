@@ -1,6 +1,7 @@
 package DTO;
 
 public class RoleDTO {
+
     public int id;
     public String name;
     public String description;
@@ -37,5 +38,4 @@ public class RoleDTO {
     public void setDescription(String description) {
         this.description = description;
     }
-    
 }

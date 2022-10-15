@@ -5,6 +5,7 @@ import java.util.logging.*;
 import javax.swing.JOptionPane;
 
 public class ConnectDB {
+
     String user = "root";
     String pass = "";
     String url = "jdbc:mysql://localhost:3306/coffeeshop?useUnicode=yes&characterEncoding=UTF-8";

@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.ImageIcon;
+import javax.swing.border.LineBorder;
 
 public class Login extends JFrame {
 
@@ -65,35 +66,35 @@ public class Login extends JFrame {
         btnReset.setBounds(150, 400, 130, 40);
         btnReset.setPreferredSize(new Dimension(130, 40));
         btnReset.setFont(new Font("Tohoma", 1, 20));
-        btnReset.setBackground(new java.awt.Color(90, 50, 30));
+        btnReset.setBackground(new Color(90, 50, 30));
         btnReset.setForeground(Color.white);
-        btnReset.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        btnReset.setBorder(new LineBorder(new Color(255, 255, 255), 1, true));
 
         JButton btnOK = new JButton("Đăng nhập");
         btnOK.setBounds(300, 400, 130, 40);
         btnOK.setFont(new Font("Tohoma", 1, 20));
         btnOK.setBackground(new Color(236, 177, 51));
         btnOK.setForeground(Color.white);
-        btnOK.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        btnOK.setBorder(new LineBorder(new Color(255, 255, 255), 1, true));
         background.add(btnReset);
         background.add(btnOK);
 
         setLocationRelativeTo(null);
         setVisible(true);
 
-        btnOK.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnOK.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 btOKMouseClicked(evt);
             }
         });
 
-        btnReset.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnReset.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 btResetMouseClicked(evt);
             }
         });
 
-        ckbSee.addActionListener(new java.awt.event.ActionListener() {
+        ckbSee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (ckbSee.isSelected()) {
@@ -105,8 +106,9 @@ public class Login extends JFrame {
                 }
             }
         });
-        txtuser.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+
+        txtuser.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     txtpass.requestFocus();
                 }
@@ -114,7 +116,7 @@ public class Login extends JFrame {
         });
     }
 
-    private void btResetMouseClicked(java.awt.event.MouseEvent evt) {
+    private void btResetMouseClicked(MouseEvent evt) {
         int ret = JOptionPane.showOptionDialog(this, "Bạn muốn đóng chương trình?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Close", "Cancel"}, "Close");
         if (ret == JOptionPane.YES_OPTION) {
             this.setVisible(false);            //chọn close
@@ -129,18 +131,18 @@ public class Login extends JFrame {
         }
     }
 
-    private void btOKMouseClicked(java.awt.event.MouseEvent evt) {
+    private void btOKMouseClicked(MouseEvent evt) {
         ArrayList<AccountDTO> acc = new ArrayList<>();
         String username = txtuser.getText();
         String password = txtpass.getText();
 
         if (username.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập username");
-            txtuser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+            txtuser.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 51, 51)));
             txtuser.requestFocus();
         } else if (password.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập password");
-            txtpass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+            txtpass.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255, 51, 51)));
             txtpass.requestFocus();
         } else {
             try {

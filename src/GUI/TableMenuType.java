@@ -3,6 +3,7 @@ package GUI;
 import BUS.MenuTypeBUS;
 import DTO.MenuTypeDTO;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,7 +13,6 @@ public class TableMenuType extends JFrame {
     public static DefaultTableModel model = new DefaultTableModel();
     private ArrayList<MenuTypeDTO> listMenuType = new ArrayList<>();
     public static JTable tblMenuType = new JTable();
-    private JPanel panel;
 
     public TableMenuType() {
         init();
@@ -29,7 +29,7 @@ public class TableMenuType extends JFrame {
         btnOK.setBounds(250, 290, 100, 40);
         btnOK.setForeground(new Color(255, 149, 43));
         btnOK.setBackground(Color.white);
-        
+
         JButton btnCancel = new JButton("Bỏ chọn");
         btnCancel.setBounds(360, 290, 100, 40);
         btnCancel.setBackground(Color.white);
@@ -52,19 +52,20 @@ public class TableMenuType extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
 
-        btnOK.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        btnOK.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 btOKMouseClicked(evt);
             }
         });
-        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        
+        btnCancel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 setVisible(false);
             }
         });
     }
 
-    private void btOKMouseClicked(java.awt.event.MouseEvent evt) {
+    private void btOKMouseClicked(MouseEvent evt) {
         int i = tblMenuType.getSelectedRow();
         FormMenu.txtType.setText(tblMenuType.getModel().getValueAt(i, 0).toString());
         setVisible(false);

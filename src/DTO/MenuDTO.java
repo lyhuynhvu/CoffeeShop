@@ -1,6 +1,7 @@
 package DTO;
 
 public class MenuDTO {
+
     public int id;
     public String name;
     public int type;
@@ -67,5 +68,4 @@ public class MenuDTO {
     public void setImage(String image) {
         this.image = image;
     }
-    
 }

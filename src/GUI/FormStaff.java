@@ -149,13 +149,13 @@ public class FormStaff extends JFrame {
                 btOKMouseClicked(evt);
             }
         });
-        
+
         btnCancel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 setVisible(false);
             }
         });
-        
+
         btnReset.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 txtFullname.setText("");
@@ -174,7 +174,7 @@ public class FormStaff extends JFrame {
                 }
             }
         });
-        
+
         txtPhone.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -182,7 +182,7 @@ public class FormStaff extends JFrame {
                 }
             }
         });
-        
+
         txtEmail.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -299,6 +299,7 @@ public class FormStaff extends JFrame {
         Pattern pt = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
                 + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
         Matcher matcher = pt.matcher(email);
+        
         if (email.equals("")) {
             txtEmail.setBorder(BorderFactory.createLineBorder(new Color(255, 51, 51)));
             txtEmail.requestFocus();
@@ -319,11 +320,11 @@ public class FormStaff extends JFrame {
             kiemtra = false;
             ThongBao(ThongBao, "lỗi nhập liệu", 2);
         }
+        
         return kiemtra;
     }
 
     public void ThongBao(String noiDungThongBao, String tieuDeThongBao, int icon) {
-        JOptionPane.showMessageDialog(new JPanel(), noiDungThongBao,
-                tieuDeThongBao, icon);
+        JOptionPane.showMessageDialog(new JPanel(), noiDungThongBao, tieuDeThongBao, icon);
     }
 }

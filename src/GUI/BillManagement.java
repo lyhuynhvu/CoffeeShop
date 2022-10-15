@@ -24,7 +24,6 @@ public class BillManagement extends JPanel {
     private JButton btnTim = new JButton("Tìm kiếm");
     private JDateChooser dcTu = new JDateChooser();
     private JDateChooser dcDen = new JDateChooser();
-    private JPanel panel;
 
     public BillManagement() {
         init();
@@ -39,23 +38,23 @@ public class BillManagement extends JPanel {
         pnSearch.setBounds(600, 50, 850, 50);
         pnSearch.setLayout(null);
         pnSearch.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-        
+
         lbTuNgay.setBounds(30, 5, 80, 40);
         lbTuNgay.setForeground(new Color(90, 50, 30));
         lbTuNgay.setFont(new Font(Font.MONOSPACED, 1, 18));
         pnSearch.add(lbTuNgay);
-        
+
         dcTu.setBounds(110, 5, 200, 40);
         pnSearch.add(dcTu);
-        
+
         lbDenNgay.setBounds(345, 5, 90, 40);
         lbDenNgay.setForeground(new Color(90, 50, 30));
         lbDenNgay.setFont(new Font(Font.MONOSPACED, 1, 18));
         pnSearch.add(lbDenNgay);
-        
+
         dcDen.setBounds(435, 5, 200, 40);
         pnSearch.add(dcDen);
-        
+
         btnTim.setForeground(new Color(90, 50, 30));
         btnTim.setBackground(Color.white);
         btnTim.setBounds(670, 5, 150, 40);
@@ -73,7 +72,7 @@ public class BillManagement extends JPanel {
         btnViewDetail.setBackground(Color.white);
         btnViewDetail.setForeground(new Color(90, 50, 30));
         add(btnViewDetail);
-        
+
         JScrollPane scroll = new JScrollPane(tblBill);
         scroll.setBounds(new Rectangle(30, 110, 500, 720));
         tblBill.getTableHeader().setOpaque(false);
@@ -84,19 +83,13 @@ public class BillManagement extends JPanel {
         tblBill.setSelectionBackground(new Color(244, 223, 125));
         tblBill.setRowHeight(50);
         add(scroll);
-        
+
         JLabel lbBillDetail = new JLabel("Chi tiết hóa đơn");
         lbBillDetail.setBounds(600, 150, 200, 40);
         lbBillDetail.setForeground(new Color(90, 50, 30));
         lbBillDetail.setFont(new Font(Font.MONOSPACED, 3, 18));
         add(lbBillDetail);
 
-        JButton btnXuat = new JButton("Xuất hóa đơn");
-        btnXuat.setBounds(800, 150, 150, 40);
-        btnXuat.setBackground(Color.white);
-        btnXuat.setForeground(new Color(90, 50, 30));
-        add(btnXuat);
-        
         JScrollPane scroll2 = new JScrollPane(tblDetail);
         scroll2.setBounds(new Rectangle(600, 210, 850, 620));
         tblDetail.getTableHeader().setOpaque(false);
@@ -110,12 +103,12 @@ public class BillManagement extends JPanel {
 
         setVisible(true);
 
-        tblBill.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tblBill.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
                 int i = tblBill.getSelectedRow();
             }
         });
-        
+
         btnViewDetail.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 btViewMouseClicked(evt);
@@ -148,15 +141,15 @@ public class BillManagement extends JPanel {
             tblBill.setModel(model);
         }
     }
-    
-    private void btViewMouseClicked(MouseEvent event){
-        int i=tblBill.getSelectedRow();
+
+    private void btViewMouseClicked(MouseEvent event) {
+        int i = tblBill.getSelectedRow();
         int billId = Integer.parseInt(tblBill.getModel().getValueAt(i, 0).toString());
         BillDetailBUS dBus = new BillDetailBUS();
         listDetail = dBus.docDSDetail(billId);
         renderDetailTbl();
     }
-    
+
     public void renderDetailTbl() {
         Vector header = new Vector();
         header.add("Mã CTHD");

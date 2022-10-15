@@ -1,6 +1,7 @@
 package DTO;
 
 public class StaffDTO {
+
     public int id;
     public int roleId;
     public String fullname;
