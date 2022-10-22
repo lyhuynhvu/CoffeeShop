@@ -43,6 +43,27 @@ public class BillDAO extends ConnectDB {
             Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public ArrayList<BillDTO> searchByDate(String from, String to) {
+        ArrayList dsBill = new ArrayList<BillDTO>();
+        try {
+            getConnect();
+            String qry = "select * from bill where create_at >= '" + from + "' and create_at <= '" + to + "'";
+            st = conn.createStatement();
+            rs = st.executeQuery(qry);
+            while (rs.next()) {
+                BillDTO bill = new BillDTO();
+                bill.id = rs.getInt(1);
+                bill.createAt = rs.getString(2);
+                bill.createBy = rs.getString(3);
+                bill.total = rs.getInt(4);
+                dsBill.add(bill);
+            }
+            closeConnect();
+        } catch (Exception e) {
+        }
+        return dsBill;
+    }
 
     public int getTheLast() {
         int idBill = 0;

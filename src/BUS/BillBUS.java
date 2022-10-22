@@ -17,10 +17,16 @@ public class BillBUS {
         dshd = data.docDSBill();
         return dshd;
     }
-
+    
     public void create(int total) {
         BillDAO data = new BillDAO();
         data.create(total);
+    }
+    
+    public ArrayList<BillDTO> searchByDate(String from, String to) {
+        BillDAO data = new BillDAO();
+        dshd = data.searchByDate(from, to);
+        return dshd;
     }
 
     public int getTheLast() {

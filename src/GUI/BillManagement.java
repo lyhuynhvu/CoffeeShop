@@ -7,6 +7,7 @@ import DTO.BillDetailDTO;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -114,6 +115,12 @@ public class BillManagement extends JPanel {
                 btViewMouseClicked(evt);
             }
         });
+        
+        btnTim.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                btnSearchByDate(evt);
+            }
+        });
     }
 
     public void loadtblBill() {
@@ -172,5 +179,14 @@ public class BillManagement extends JPanel {
             modelDetail.addRow(row);
             tblDetail.setModel(modelDetail);
         }
+    }
+    
+    public void btnSearchByDate(MouseEvent event) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String from = sdf.format(dcTu.getDate()) + " 00:00:00";
+        String to = sdf.format(dcDen.getDate()) + " 23:59:59";
+        BillBUS billBus = new BillBUS();
+        listBill = billBus.searchByDate(from, to);
+        renderToTbl();
     }
 }
